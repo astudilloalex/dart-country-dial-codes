@@ -1,27 +1,22 @@
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This package allows you to get the dialing codes and the name of 250 countries.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* This package contains all dialing codes of the 250 countries.
+* Obtain the marking code of a country from the ISO 3166 Alpha-2 code.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+* Add this package to dependencies section. 
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+* Get the country dial code by ISO 3166 
 
 ```dart
-const like = 'sample';
+final CountryDialCode = CountryDialCode.fromCountryCode('US');
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+Check the repository for more info: [Here](https://github.com/astudilloalex/dart-country-dial-codes)
