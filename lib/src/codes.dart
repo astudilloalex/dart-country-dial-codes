@@ -1,3 +1,4 @@
+/// List of the all countries in English.
 const List<Map<String, String>> codes = [
   {
     'name': 'Afghanistan',
