@@ -1,4 +1,5 @@
 ## 1.1.0
+
 * Add flutter dependency
 * Add country flags
 
