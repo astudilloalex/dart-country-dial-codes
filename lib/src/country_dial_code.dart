@@ -3,16 +3,25 @@ import 'package:country_dial_code/src/exceptions.dart';
 
 /// Country dial code.
 class CountryDialCode {
-  final String name;
-  final String code;
-  final String dialCode;
-
   /// Define a [CountryDialCode] class.
   const CountryDialCode({
     required this.name,
     required this.code,
     required this.dialCode,
+    required this.flagURI,
   });
+
+  /// The name of country.
+  final String name;
+
+  /// The ISO 3166-1 Alpha-2 code.
+  final String code;
+
+  /// The dial code of the country.
+  final String dialCode;
+
+  /// The URI flag saved in assets folder.
+  final String flagURI;
 
   /// Returns a [CountryDialCode] class by ISO 3166 Alpha-2 [countryCode].
   ///
@@ -27,6 +36,7 @@ class CountryDialCode {
       name: country['name']!,
       code: country['code']!,
       dialCode: country['dialCode']!,
+      flagURI: 'assets/flags/${country['code'].toString().toLowerCase()}.png',
     );
   }
 }
