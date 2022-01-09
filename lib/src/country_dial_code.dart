@@ -32,11 +32,33 @@ class CountryDialCode {
       orElse: () => {},
     );
     if (country.isEmpty) throw const CountryNotFoundException();
+    return CountryDialCode.fromJson(country);
+  }
+
+  /// Returns a [CountryDialCode] class by [dialCode].
+  ///
+  /// Throw a [CountryNotFoundException] if the country does not exist.
+  factory CountryDialCode.fromDialCode(String dialCode) {
+    final Map<String, String> country = codes.firstWhere(
+      (code) => code['dialCode'] == dialCode.toUpperCase(),
+      orElse: () => {},
+    );
+    if (country.isEmpty) throw const CountryNotFoundException();
+    return CountryDialCode.fromJson(country);
+  }
+
+  /// Returns a [CountryDialCode] class from [json] Map.
+  factory CountryDialCode.fromJson(Map<String, dynamic> json) {
     return CountryDialCode(
-      name: country['name']!,
-      code: country['code']!,
-      dialCode: country['dialCode']!,
-      flagURI: 'assets/flags/${country['code'].toString().toLowerCase()}.png',
+      name: json['name'] as String,
+      code: json['code'] as String,
+      dialCode: json['dialCode'] as String,
+      flagURI: 'assets/flags/${json['code'].toString().toLowerCase()}.png',
     );
   }
+}
+
+List<CountryDialCode> get allCountries {
+  const List<Map<String, String>> jsonList = codes;
+  return jsonList.map((json) => CountryDialCode.fromJson(json)).toList();
 }

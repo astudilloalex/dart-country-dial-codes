@@ -1,6 +1,6 @@
 name: country_dial_code
 description: This package allows you to get the dialing codes and the name of 250 countries.
-version: 1.1.0
+version: 1.1.2
 repository: https://github.com/astudilloalex/dart-country-dial-codes
 
 environment:
