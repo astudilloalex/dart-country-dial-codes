@@ -1,5 +1,5 @@
 /// List of the all countries in English.
-const List<Map<String, String>> codes = [
+const List<Map<String, String>> dialCodes = [
   {
     'name': 'Afghanistan',
     'code': 'AF',

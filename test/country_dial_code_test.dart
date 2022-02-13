@@ -1,4 +1,4 @@
-import 'package:country_dial_code/src/country_dial_code.dart';
+import 'package:country_dial_code/src/domain/entities/country_dial_code.dart';
 import 'package:test/test.dart';
 
 void main() {
