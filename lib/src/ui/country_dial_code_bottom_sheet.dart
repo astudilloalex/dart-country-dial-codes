@@ -77,18 +77,21 @@ class _CountryDialCodeBottomSheetState
   }
 
   void _search(String value) {
+    final formattedSearch = value.trim().toLowerCase().replaceAll('+', '');
+
     setState(() {
       filteredCountries = countries.where(
         (element) {
-          return element.name.toLowerCase().contains(value.toLowerCase()) ||
-              element.dialCode.contains(value.toLowerCase());
+          return element.name.toLowerCase().contains(formattedSearch) ||
+              element.dialCode.contains(formattedSearch) ||
+              element.code.toLowerCase().contains(formattedSearch);
         },
       ).toList()
         // sort based on exact matches in dialCode, dialCode or name
         ..sort((a, b) {
-          if (a.dialCode == value) {
+          if (a.dialCode.replaceAll('+', '') == value) {
             return -1;
-          } else if (b.dialCode == value) {
+          } else if (b.dialCode.replaceAll('+', '') == value) {
             return 1;
           } else if (a.dialCode.contains(value)) {
             return -1;
