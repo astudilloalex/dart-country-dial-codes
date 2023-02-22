@@ -43,6 +43,7 @@ class _CountryDialCodeBottomSheetState
               onChanged: _search,
               style: widget.settings.searchTextStyle,
               decoration: widget.settings.inputDecoration,
+              autofocus: true,
             ),
             const SizedBox(height: 8.0),
             Expanded(
