@@ -83,7 +83,25 @@ class _CountryDialCodeBottomSheetState
           return element.name.toLowerCase().contains(value.toLowerCase()) ||
               element.dialCode.contains(value.toLowerCase());
         },
-      ).toList();
+      ).toList()
+        // sort based on exact matches in dialCode, dialCode or name
+        ..sort((a, b) {
+          if (a.dialCode == value) {
+            return -1;
+          } else if (b.dialCode == value) {
+            return 1;
+          } else if (a.dialCode.contains(value)) {
+            return -1;
+          } else if (b.dialCode.contains(value)) {
+            return 1;
+          } else if (a.name.toLowerCase().contains(value.toLowerCase())) {
+            return -1;
+          } else if (b.name.toLowerCase().contains(value.toLowerCase())) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
     });
   }
 }
