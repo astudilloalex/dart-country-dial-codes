@@ -1,5 +1,6 @@
 import 'package:country_dial_code/country_dial_code.dart';
 import 'package:country_dial_code/src/data/local/dial_codes.dart';
+import 'package:country_dial_code/src/util/filtered_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,10 +13,12 @@ class CountryDialCodeBottomSheet extends StatefulWidget {
   final BottomSheetSettings settings;
 
   @override
-  State<CountryDialCodeBottomSheet> createState() => _CountryDialCodeBottomSheetState();
+  State<CountryDialCodeBottomSheet> createState() =>
+      _CountryDialCodeBottomSheetState();
 }
 
-class _CountryDialCodeBottomSheetState extends State<CountryDialCodeBottomSheet> {
+class _CountryDialCodeBottomSheetState
+    extends State<CountryDialCodeBottomSheet> {
   final List<CountryDialCode> countries = dialCodes
       .map(
         (json) => CountryDialCode.fromJson(json),
@@ -79,38 +82,8 @@ class _CountryDialCodeBottomSheetState extends State<CountryDialCodeBottomSheet>
   }
 
   void _search(String value) {
-    final formattedSearch = value.trim().toLowerCase().replaceAll('+', '');
-
     setState(() {
-      filteredCountries = countries.where(
-        (element) {
-          return element.name.toLowerCase().contains(formattedSearch) ||
-              element.dialCode.contains(formattedSearch) ||
-              element.code.toLowerCase().contains(formattedSearch);
-        },
-      ).toList()
-        // sort based on exact matches in dialCode, dialCode or name
-        ..sort((a, b) {
-          if (a.dialCode.replaceAll('+', '') == formattedSearch) {
-            return -1;
-          } else if (b.dialCode.replaceAll('+', '') == formattedSearch) {
-            return 1;
-          } else if (a.code.toLowerCase() == formattedSearch) {
-            return -1;
-          } else if (b.code.toLowerCase() == formattedSearch) {
-            return 1;
-          } else if (a.dialCode.contains(formattedSearch)) {
-            return -1;
-          } else if (b.dialCode.contains(formattedSearch)) {
-            return 1;
-          } else if (a.name.toLowerCase().contains(formattedSearch)) {
-            return -1;
-          } else if (b.name.toLowerCase().contains(formattedSearch)) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+      filteredCountries = countries.search(value);
     });
   }
 }
