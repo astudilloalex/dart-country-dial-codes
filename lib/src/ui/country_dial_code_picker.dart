@@ -5,6 +5,7 @@ import 'package:country_dial_code/country_dial_code.dart';
 import 'package:country_dial_code/src/data/local/dial_codes.dart';
 import 'package:country_dial_code/src/ui/country_dial_code_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDialCodePicker extends StatefulWidget {
   const CountryDialCodePicker({
@@ -104,7 +105,7 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
             if (widget.showFlag && !widget.flagImageSettings.circle)
               ClipRRect(
                 borderRadius: widget.flagImageSettings.borderRadius,
-                child: Image.asset(
+                child: SvgPicture.asset(
                   _countryDialCode!.flagURI,
                   package: 'country_dial_code',
                   width: widget.flagImageSettings.width,
@@ -113,6 +114,7 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
               ),
             if (widget.showFlag && widget.flagImageSettings.circle)
               CircleAvatar(
+                // TODO: Support SVG images
                 backgroundImage: AssetImage(
                   _countryDialCode!.flagURI,
                   package: 'country_dial_code',
