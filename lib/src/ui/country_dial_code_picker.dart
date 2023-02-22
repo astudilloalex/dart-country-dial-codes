@@ -21,6 +21,7 @@ class CountryDialCodePicker extends StatefulWidget {
     this.showCountryDialCode = true,
     this.showFlag = true,
     this.textStyle,
+    this.countryCode,
   }) : super(key: key);
 
   /// Arrow drop down icon color.
@@ -37,6 +38,9 @@ class CountryDialCodePicker extends StatefulWidget {
 
   /// The country ISO 3166-1 Alpha-2 code for initial selection.
   final String? initialSelection;
+
+  /// The country ISO 3166-1 Alpha-2 code for initial selection.
+  final String? countryCode;
 
   /// Event when user change country code.
   final ValueChanged<CountryDialCode>? onChanged;
@@ -64,6 +68,11 @@ class CountryDialCodePicker extends StatefulWidget {
 
 class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
   CountryDialCode? _countryDialCode;
+  final List<CountryDialCode> countries = dialCodes
+      .map(
+        (json) => CountryDialCode.fromJson(json),
+      )
+      .toList();
 
   @override
   void initState() {
@@ -72,9 +81,24 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
   }
 
   @override
+  void didUpdateWidget(CountryDialCodePicker oldWidget) {
+    if (oldWidget.countryCode != widget.countryCode) {
+      setState(() {
+        _countryDialCode = countries.firstWhere(
+          (element) => element.code == widget.countryCode,
+          orElse: () => countries.first,
+        );
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  bool get isControlled => widget.countryCode != null;
+
+  @override
   Widget build(BuildContext context) {
     if (_countryDialCode == null) {
-      return const Text('');
+      return const SizedBox();
     }
     final double scale = MediaQuery.maybeOf(context)?.textScaleFactor ?? 1;
     final double gap =
@@ -137,14 +161,12 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
   }
 
   void _load() {
-    final List<CountryDialCode> countries = dialCodes
-        .map(
-          (json) => CountryDialCode.fromJson(json),
-        )
-        .toList();
-    if (widget.initialSelection != null) {
+    final String? countryCode =
+        isControlled ? widget.countryCode : widget.initialSelection;
+
+    if (countryCode != null) {
       _countryDialCode = countries.firstWhere(
-        (element) => element.code == widget.initialSelection,
+        (element) => element.code == countryCode,
         orElse: () => countries.first,
       );
     } else {
