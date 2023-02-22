@@ -91,17 +91,21 @@ class _CountryDialCodeBottomSheetState extends State<CountryDialCodeBottomSheet>
       ).toList()
         // sort based on exact matches in dialCode, dialCode or name
         ..sort((a, b) {
-          if (a.dialCode.replaceAll('+', '') == value) {
+          if (a.dialCode.replaceAll('+', '') == formattedSearch) {
             return -1;
-          } else if (b.dialCode.replaceAll('+', '') == value) {
+          } else if (b.dialCode.replaceAll('+', '') == formattedSearch) {
             return 1;
-          } else if (a.dialCode.contains(value)) {
+          } else if (a.code.toLowerCase() == formattedSearch) {
             return -1;
-          } else if (b.dialCode.contains(value)) {
+          } else if (b.code.toLowerCase() == formattedSearch) {
             return 1;
-          } else if (a.name.toLowerCase().contains(value.toLowerCase())) {
+          } else if (a.dialCode.contains(formattedSearch)) {
             return -1;
-          } else if (b.name.toLowerCase().contains(value.toLowerCase())) {
+          } else if (b.dialCode.contains(formattedSearch)) {
+            return 1;
+          } else if (a.name.toLowerCase().contains(formattedSearch)) {
+            return -1;
+          } else if (b.name.toLowerCase().contains(formattedSearch)) {
             return 1;
           } else {
             return 0;
