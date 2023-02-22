@@ -12,12 +12,10 @@ class CountryDialCodeBottomSheet extends StatefulWidget {
   final BottomSheetSettings settings;
 
   @override
-  State<CountryDialCodeBottomSheet> createState() =>
-      _CountryDialCodeBottomSheetState();
+  State<CountryDialCodeBottomSheet> createState() => _CountryDialCodeBottomSheetState();
 }
 
-class _CountryDialCodeBottomSheetState
-    extends State<CountryDialCodeBottomSheet> {
+class _CountryDialCodeBottomSheetState extends State<CountryDialCodeBottomSheet> {
   final List<CountryDialCode> countries = dialCodes
       .map(
         (json) => CountryDialCode.fromJson(json),
@@ -44,6 +42,10 @@ class _CountryDialCodeBottomSheetState
               style: widget.settings.searchTextStyle,
               decoration: widget.settings.inputDecoration,
               autofocus: true,
+              keyboardType: TextInputType.text,
+              autofillHints: const [
+                AutofillHints.telephoneNumberCountryCode,
+              ],
             ),
             const SizedBox(height: 8.0),
             Expanded(
