@@ -1,4 +1,5 @@
-library country_dial_code;
+/// Library exporting the Country Dial Code Picker package.
+library;
 
 export 'src/domain/entities/bottom_sheet_settings.dart';
 export 'src/domain/entities/country_dial_code.dart';

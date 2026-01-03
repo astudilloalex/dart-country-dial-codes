@@ -1,3 +1,5 @@
+[![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
+
 This package allows you to get the dialing codes and the name of 250 countries.
 
 ## Features

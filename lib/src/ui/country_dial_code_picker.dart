@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDialCodePicker extends StatefulWidget {
   const CountryDialCodePicker({
-    Key? key,
+    super.key,
     this.arrowDropDownColor,
     this.borderRadius = 0.0,
     this.bottomSheetSettings = const BottomSheetSettings(),
@@ -22,7 +22,7 @@ class CountryDialCodePicker extends StatefulWidget {
     this.showFlag = true,
     this.textStyle,
     this.countryCode,
-  }) : super(key: key);
+  });
 
   /// Arrow drop down icon color.
   final Color? arrowDropDownColor;
@@ -100,7 +100,8 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
     if (_countryDialCode == null) {
       return const SizedBox();
     }
-    final double scale = MediaQuery.maybeOf(context)?.textScaleFactor ?? 1;
+    final TextScaler? textScaler = MediaQuery.maybeOf(context)?.textScaler;
+    final double scale = textScaler?.scale(1) ?? 1;
     final double gap =
         scale <= 1 ? 8 : lerpDouble(8, 4, math.min(scale - 1, 1))!;
     return Padding(
@@ -138,12 +139,27 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
               ),
             if (widget.showFlag && widget.flagImageSettings.circle)
               CircleAvatar(
-                // TODO: Support SVG images
-                backgroundImage: AssetImage(
-                  _countryDialCode!.flagURI,
-                  package: 'country_dial_code',
-                ),
                 radius: widget.flagImageSettings.circleRadius,
+                backgroundColor: Colors.transparent,
+                backgroundImage: _countryDialCode!.flagURI
+                        .toLowerCase()
+                        .endsWith('.svg')
+                    ? null
+                    : AssetImage(
+                        _countryDialCode!.flagURI,
+                        package: 'country_dial_code',
+                      ),
+                child: _countryDialCode!.flagURI
+                        .toLowerCase()
+                        .endsWith('.svg')
+                    ? SvgPicture.asset(
+                        _countryDialCode!.flagURI,
+                        package: 'country_dial_code',
+                        width: widget.flagImageSettings.circleRadius * 2,
+                        height: widget.flagImageSettings.circleRadius * 2,
+                        fit: BoxFit.cover,
+                      )
+                    : null,
               ),
             if (widget.showFlag && widget.showCountryDialCode)
               SizedBox(width: gap),

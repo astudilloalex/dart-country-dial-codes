@@ -6,9 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDialCodeBottomSheet extends StatefulWidget {
   const CountryDialCodeBottomSheet({
-    Key? key,
+    super.key,
     required this.settings,
-  }) : super(key: key);
+  });
 
   final BottomSheetSettings settings;
 

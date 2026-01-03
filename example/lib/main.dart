@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +54,11 @@ class MyApp extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0.0),
+                      borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
                   onChanged: (value) {
-                    print(value.dialCode);
+                    debugPrint(value.dialCode);
                   },
                 ),
               ),
