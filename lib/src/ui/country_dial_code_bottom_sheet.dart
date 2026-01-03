@@ -1,6 +1,8 @@
 import 'package:country_dial_code/country_dial_code.dart';
 import 'package:country_dial_code/src/data/local/dial_codes.dart';
+import 'package:country_dial_code/src/util/filtered_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDialCodeBottomSheet extends StatefulWidget {
   const CountryDialCodeBottomSheet({
@@ -42,6 +44,11 @@ class _CountryDialCodeBottomSheetState
               onChanged: _search,
               style: widget.settings.searchTextStyle,
               decoration: widget.settings.inputDecoration,
+              autofocus: true,
+              keyboardType: TextInputType.text,
+              autofillHints: const [
+                AutofillHints.telephoneNumberCountryCode,
+              ],
             ),
             const SizedBox(height: 8.0),
             Expanded(
@@ -51,9 +58,10 @@ class _CountryDialCodeBottomSheetState
                 itemBuilder: (_, index) {
                   return ListTile(
                     leading: widget.settings.showFlag
-                        ? Image.asset(
+                        ? SvgPicture.asset(
                             filteredCountries[index].flagURI,
                             package: 'country_dial_code',
+                            width: 50,
                           )
                         : null,
                     title: Text(
@@ -75,12 +83,7 @@ class _CountryDialCodeBottomSheetState
 
   void _search(String value) {
     setState(() {
-      filteredCountries = countries.where(
-        (element) {
-          return element.name.toLowerCase().contains(value.toLowerCase()) ||
-              element.dialCode.contains(value.toLowerCase());
-        },
-      ).toList();
+      filteredCountries = countries.search(value);
     });
   }
 }

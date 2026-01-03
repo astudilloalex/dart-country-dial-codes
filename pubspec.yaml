@@ -5,10 +5,11 @@ repository: https://github.com/astudilloalex/dart-country-dial-codes
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
-  
+
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.2
 
 dev_dependencies:
   lint: ^1.8.2
