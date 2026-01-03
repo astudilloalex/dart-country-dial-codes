@@ -1,4 +1,4 @@
-## 1.2.0
+## 1.3.0
 
 * Add customizable `CountryDialCodePicker` widget with modal bottom sheet selector and change callbacks.
 * Introduce `BottomSheetSettings` and `FlagImageSettings` classes to configure the picker layout and flag rendering.
