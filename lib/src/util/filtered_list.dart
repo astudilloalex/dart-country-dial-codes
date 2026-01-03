@@ -4,13 +4,11 @@ extension FilteredCountryList on List<CountryDialCode> {
   List<CountryDialCode> search(String value) {
     final formattedValue = value.trim().toLowerCase().replaceAll('+', '');
 
-    return where(
-      (element) {
+    return where((element) {
         return element.name.toLowerCase().contains(formattedValue) ||
             element.dialCode.contains(formattedValue) ||
             element.code.toLowerCase().contains(formattedValue);
-      },
-    ).toList()
+      }).toList()
       // sort based on exact matches in dialCode, dialCode or name
       ..sort((a, b) {
         if (a.dialCode.replaceAll('+', '') == formattedValue) {

@@ -68,11 +68,8 @@ class CountryDialCodePicker extends StatefulWidget {
 
 class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
   CountryDialCode? _countryDialCode;
-  final List<CountryDialCode> countries = dialCodes
-      .map(
-        (json) => CountryDialCode.fromJson(json),
-      )
-      .toList();
+  final List<CountryDialCode> countries =
+      dialCodes.map((json) => CountryDialCode.fromJson(json)).toList();
 
   @override
   void initState() {
@@ -141,33 +138,28 @@ class _CountryDialCodePickerState extends State<CountryDialCodePicker> {
               CircleAvatar(
                 radius: widget.flagImageSettings.circleRadius,
                 backgroundColor: Colors.transparent,
-                backgroundImage: _countryDialCode!.flagURI
-                        .toLowerCase()
-                        .endsWith('.svg')
-                    ? null
-                    : AssetImage(
-                        _countryDialCode!.flagURI,
-                        package: 'country_dial_code',
-                      ),
-                child: _countryDialCode!.flagURI
-                        .toLowerCase()
-                        .endsWith('.svg')
-                    ? SvgPicture.asset(
-                        _countryDialCode!.flagURI,
-                        package: 'country_dial_code',
-                        width: widget.flagImageSettings.circleRadius * 2,
-                        height: widget.flagImageSettings.circleRadius * 2,
-                        fit: BoxFit.cover,
-                      )
-                    : null,
+                backgroundImage:
+                    _countryDialCode!.flagURI.toLowerCase().endsWith('.svg')
+                        ? null
+                        : AssetImage(
+                          _countryDialCode!.flagURI,
+                          package: 'country_dial_code',
+                        ),
+                child:
+                    _countryDialCode!.flagURI.toLowerCase().endsWith('.svg')
+                        ? SvgPicture.asset(
+                          _countryDialCode!.flagURI,
+                          package: 'country_dial_code',
+                          width: widget.flagImageSettings.circleRadius * 2,
+                          height: widget.flagImageSettings.circleRadius * 2,
+                          fit: BoxFit.cover,
+                        )
+                        : null,
               ),
             if (widget.showFlag && widget.showCountryDialCode)
               SizedBox(width: gap),
             if (widget.showCountryDialCode)
-              Text(
-                _countryDialCode!.dialCode,
-                style: widget.textStyle,
-              ),
+              Text(_countryDialCode!.dialCode, style: widget.textStyle),
             if (widget.showArrowDropDown)
               Icon(Icons.arrow_drop_down, color: widget.arrowDropDownColor),
           ],

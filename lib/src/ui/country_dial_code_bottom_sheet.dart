@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDialCodeBottomSheet extends StatefulWidget {
-  const CountryDialCodeBottomSheet({
-    super.key,
-    required this.settings,
-  });
+  const CountryDialCodeBottomSheet({super.key, required this.settings});
 
   final BottomSheetSettings settings;
 
@@ -19,11 +16,8 @@ class CountryDialCodeBottomSheet extends StatefulWidget {
 
 class _CountryDialCodeBottomSheetState
     extends State<CountryDialCodeBottomSheet> {
-  final List<CountryDialCode> countries = dialCodes
-      .map(
-        (json) => CountryDialCode.fromJson(json),
-      )
-      .toList();
+  final List<CountryDialCode> countries =
+      dialCodes.map((json) => CountryDialCode.fromJson(json)).toList();
   List<CountryDialCode> filteredCountries = [];
 
   @override
@@ -46,9 +40,7 @@ class _CountryDialCodeBottomSheetState
               decoration: widget.settings.inputDecoration,
               autofocus: true,
               keyboardType: TextInputType.text,
-              autofillHints: const [
-                AutofillHints.telephoneNumberCountryCode,
-              ],
+              autofillHints: const [AutofillHints.telephoneNumberCountryCode],
             ),
             const SizedBox(height: 8.0),
             Expanded(
@@ -57,20 +49,21 @@ class _CountryDialCodeBottomSheetState
                 itemCount: filteredCountries.length,
                 itemBuilder: (_, index) {
                   return ListTile(
-                    leading: widget.settings.showFlag
-                        ? SvgPicture.asset(
-                            filteredCountries[index].flagURI,
-                            package: 'country_dial_code',
-                            width: 50,
-                          )
-                        : null,
+                    leading:
+                        widget.settings.showFlag
+                            ? SvgPicture.asset(
+                              filteredCountries[index].flagURI,
+                              package: 'country_dial_code',
+                              width: 50,
+                            )
+                            : null,
                     title: Text(
                       filteredCountries[index].dialCode,
                       style: widget.settings.textStyle,
                     ),
-                    onTap: () => Navigator.of(context).pop(
-                      filteredCountries[index],
-                    ),
+                    onTap:
+                        () =>
+                            Navigator.of(context).pop(filteredCountries[index]),
                   );
                 },
               ),

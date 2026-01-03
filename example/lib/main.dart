@@ -12,9 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Country dial code'),
@@ -43,9 +41,7 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   bottomSheetSettings: BottomSheetSettings(
-                    textStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
                     searchTextStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
